@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102b25">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bingo Caller">
+<link rel="manifest" href="manifest.webmanifest">
+<title>UK Bingo Caller</title>
+<style>
+:root{color-scheme:dark;--bg:#102b25;--panel:#183b33;--card:#21483e;--ink:#f6f5ec;--muted:#b8c9c1;--gold:#e7bd62;--line:#426459}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom)}
+main{max-width:760px;margin:auto;padding:22px 0 36px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold);font-weight:800}.title{font-size:27px;font-weight:900;margin:3px 0}.muted{color:var(--muted)}.count{text-align:right;font-size:13px}.count strong{font-size:27px;color:var(--gold)}
+.current{background:linear-gradient(145deg,#21483e,#18372f);border:1px solid var(--line);border-radius:22px;text-align:center;padding:24px 14px;margin:20px 0 14px}.status{font-size:11px;letter-spacing:2px;font-weight:800;color:var(--gold)}.number{font-size:clamp(76px,22vw,116px);line-height:1.05;font-weight:950;letter-spacing:-5px;margin:8px 0}.call{font-size:clamp(20px,5vw,27px);font-weight:850}.sub{font-size:13px;color:var(--muted);margin-top:8px}
+.actions{display:flex;gap:10px;margin-bottom:18px}.actions button{min-height:54px;border:0;border-radius:14px;padding:12px 18px;font-size:16px;font-weight:850;cursor:pointer}.draw{background:var(--gold);color:#17251e;flex:1}.renew{background:var(--panel);border:1px solid var(--line)!important;color:var(--ink)}button:disabled{opacity:.45}.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px;margin-top:14px}.panelhead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:12px}.panel h2{font-size:14px;letter-spacing:1px;margin:0}.small{font-size:11px;color:var(--muted)}.recent{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.recent-item{background:var(--card);border-radius:12px;text-align:center;padding:10px 3px;min-width:0}.recent-item strong{display:block;font-size:22px}.recent-item span{display:block;font-size:10px;line-height:1.25;color:var(--muted);overflow-wrap:anywhere;margin-top:4px}.empty{grid-column:1/-1;color:var(--muted);font-size:13px;padding:12px 0;text-align:center}.grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px}.ball{aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#285347;border:1px solid #52766a;font-size:clamp(11px,2.8vw,15px);font-weight:800}.ball.called{background:#64736d;color:#c6cfca;border-color:#64736d;opacity:.65}.legend{font-size:11px;color:var(--muted);margin:10px 0}.footer{text-align:center;font-size:11px;color:var(--muted);margin:16px 0}
+button:focus-visible{outline:3px solid white;outline-offset:3px}
+@media(min-width:600px){main{padding-top:30px}.current{padding:30px}.panel{padding:19px}.grid{gap:7px}.ball{font-size:15px}}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><div><div class="eyebrow">HOUSE! HOUSE!</div><div class="title">UK Bingo Caller</div><div class="muted">The classic 90-ball game</div></div><div class="count"><div class="muted">NUMBERS CALLED</div><strong id="count">0</strong><span class="muted"> / 90</span></div></header>
+<section class="current" aria-live="polite" aria-atomic="true"><div class="status" id="status">READY TO PLAY</div><div class="number" id="number">—</div><div class="call" id="call">Press CALL NEXT NUMBER</div><div class="sub" id="sub">Your bingo game starts here!</div></section>
+<div class="actions"><button class="draw" id="draw">🎱 CALL NEXT NUMBER</button><button class="renew" id="renew">↻ New Game</button></div>
+<section class="panel"><div class="panelhead"><h2>LAST FIVE NUMBERS</h2><span class="small">Most recent first</span></div><div class="recent" id="recent"><div class="empty">No numbers called yet</div></div></section>
+<section class="panel"><div class="panelhead"><h2>NUMBER REFERENCE BOARD</h2><span class="small" id="remaining">90 remaining</span></div><div class="legend">Available · Called numbers are greyed out</div><div class="grid" id="grid" aria-label="Bingo numbers 1 to 90"></div></section>
+<div class="footer">Traditional UK bingo calls · Some calls have regional variations</div>
+</main>
+<script>
+const calls=["Kelly's eye","One little duck","Cup of tea","Knock at the door","Man alive","Tom Mix","Lucky seven","Garden gate","Doctor's orders","David's den","Legs eleven","One dozen","Unlucky for some","Valentine's Day","Young and keen","Sweet sixteen","Dancing Queen","Coming of age","Goodbye teens","One score","Key of the door","Two little ducks","The Lord is my shepherd","Two dozen","Duck and dive","Pick and mix","Gateway to heaven","In a state","Rise and shine","Dirty Gertie","Get up and run","Buckle my shoe","All the threes","Ask for more","Jump and jive","Three dozen","More than eleven","Christmas cake","39 steps","Life begins","Time for fun","Winnie the Pooh","Down on your knees","Droopy drawers","Halfway there","Up to tricks","Four and seven","Four dozen","PC","Half a century","Tweak of the thumb","Danny La Rue","Stuck in a tree","Clean the floor","Snakes alive","Was she worth it?","Heinz varieties","Make them wait","Brighton line","Five dozen","Baker's bun","Turn the screw","Tickle me","Red raw","Old age pension","Clickety click","Made in heaven","Saving grace","Either way up","Three score","Bang on the drum","Six dozen","Queen bee","Hit the floor","Strive and strive","Trombones","Sunset Strip","Heaven's gate","One more time","Eight and blank","Stop and run","Straight on through","Time for tea","Seven dozen","Staying alive","Between the sticks","Torquay in Devon","Two fat ladies","Nearly there","Top of the shop"];
+let remaining=[],history=[];
+const el=id=>document.getElementById(id);
+function reset(){remaining=Array.from({length:90},(_,i)=>i+1);history=[];el('number').textContent='—';el('call').textContent='Press CALL NEXT NUMBER';el('status').textContent='READY TO PLAY';el('sub').textContent='Your bingo game starts here!';render()}
+function render(){el('count').textContent=history.length;el('remaining').textContent=remaining.length+' remaining';el('grid').innerHTML=Array.from({length:90},(_,i)=>{const n=i+1;return `<div class="ball ${history.includes(n)?'called':''}" aria-label="${n} ${history.includes(n)?'called':'available'}">${n}</div>`}).join('');const last=history.slice(-5).reverse();el('recent').innerHTML=last.length?last.map(n=>`<div class="recent-item"><strong>${n}</strong><span>${calls[n-1]}</span></div>`).join(''):'<div class="empty">No numbers called yet</div>';el('draw').disabled=!remaining.length}
+el('draw').addEventListener('click',()=>{if(!remaining.length)return;const i=Math.floor(Math.random()*remaining.length),n=remaining.splice(i,1)[0];history.push(n);el('number').textContent=n;el('call').textContent=calls[n-1];el('status').textContent=`NUMBER ${history.length} OF 90`;el('sub').textContent=`Number ${n} has been called!`;if(!remaining.length){el('status').textContent='FULL HOUSE!';el('sub').textContent='All 90 numbers have been called. Start a new game to play again.'}render()});
+el('renew').addEventListener('click',()=>{if(history.length&&!confirm('Start a new game? This clears all called numbers.'))return;reset()});
+reset();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body></html>

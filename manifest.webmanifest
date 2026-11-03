@@ -1,0 +1,11 @@
+{
+  "name": "UK Bingo Caller",
+  "short_name": "Bingo Caller",
+  "description": "A traditional 90-ball UK bingo caller.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#102b25",
+  "theme_color": "#102b25",
+  "icons": []
+}
